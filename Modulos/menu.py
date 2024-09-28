@@ -1,33 +1,28 @@
 import os
+import Modulos.allMenu as all
+import Modulos.utils as ui
 
 def crearMenu():
-    options = [1, 2, 3, 4, 5]
     valid = True
     while valid:
         try:
             print("*****************************************************")
             print("****               LIGA BETPLAY                  ****")
             print("*****************************************************")
-            menu = (
-                "1. Equipos torneo \n"
-                "2. Plantel equipos \n"
-                "3. Programar partidos \n"
-                "4. Resultado fecha \n"
-                "5. Salir \n"
-            )
-            print(menu)
-            resul = int(input(":"))
-            if resul not in options:
-                print("Su opción no es válida, escoja otra.")
-                print('Presione cualquier tecla para continuar...')
-                os.system("cls" if os.name == "nt" else "clear")
+            for key, value in all.menuP.items():
+                print(f"{key}) {value}")
+            
+            resul = int(input(":")) 
+            
+            # Verificamos si la opción es válida
+            if not ui.validar(resul, all.menuP):  
                 continue
-
+            
+            valid = False  
+        
         except ValueError as e:
             print(f"El dato no es válido: {e}")
-            print('Presione cualquier tecla para continuar...')
-            os.system("cls" if os.name == "nt" else "clear")
-        
-        else:
-            valid = False
-            return resul
+            input('Presione cualquier tecla para continuar...')
+            ui.limpiarConsola()  
+    
+    return resul 
