@@ -1,4 +1,3 @@
-import os
 import Modulos.allMenu as all
 import Modulos.utils as ui
 
@@ -9,8 +8,9 @@ def crearMenu():
             print("*****************************************************")
             print("****               LIGA BETPLAY                  ****")
             print("*****************************************************")
-            for key, value in all.menuP.items():
-                print(f"{key}) {value}")
+            # for key, value in all.menuP.items():
+            #     print(f"{key}) {value}")
+            all.crearMenu(all.menuP)
             
             resul = int(input(":")) 
             

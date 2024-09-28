@@ -1,12 +1,15 @@
-
 import Modulos.utils as ut
-def subMenuEquipo(equipos:list):
+import Modulos.allMenu as all
+
+contador = 1
+def subMenuEquipo(equipos:dict):
+    
+    ut.limpiarConsola()
+    isValid =True
     try:
-        ut.limpiarConsola()
-        isValid =True
+     
         while isValid:
-            
-            print("1. Registrar equipo \n2. Ver Equipos \n3. Volver ")
+            all.crearMenu(all.menuEq)
             opc = int(input(": "))
             if (opc == 1):
                 ut.limpiarConsola()
@@ -16,13 +19,14 @@ def subMenuEquipo(equipos:list):
                 ut.limpiarConsola()
             elif (opc == 2):
                  ut.limpiarConsola()
-                 if(equipos == []):
+                 if(equipos == {}):
                      print("Aun no se han registrado equipos")
                      input('Presione cualquier tecla para continuar...')
                      ut.limpiarConsola()
                  else:
-                    equiposDispo = [equipo[0] for equipo in equipos]
-                    print(f"Los siguientes son los equipos registrados:\n {equiposDispo}")
+                    
+                    print(f"Los siguientes son los equipos registrados:\n ")
+                    print([a['nombre'] for a in equipos.values()]) 
                     input('Presione cualquier tecla para continuar...')
                     ut.limpiarConsola()
 
@@ -35,13 +39,23 @@ def subMenuEquipo(equipos:list):
     except ValueError:
         print("Hubo un error en el proceso, intente nuevamente.")
 
-def regEquipo(eq:list):
+def regEquipo(eq:dict):
+    global contador
     equipo = pedirDatos()
-    eq.append(equipo)
+    eq[str(contador).zfill(2)] = equipo
+    contador += 1
 
     
 def pedirDatos ():
-
     name = str(input("Ingrese el nombre de su equipo: ")).lower()
-    datos = [name, 0, 0,0,0,0,0]
+    datos = {
+        "nombre" : name,
+        "pj" : 0,
+        "pg" : 0,
+        "pp" : 0,
+        "pe" : 0,
+        "gf" : 0,
+        "gc" : 0,
+        
+    }
     return datos

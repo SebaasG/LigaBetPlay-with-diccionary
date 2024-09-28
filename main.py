@@ -5,14 +5,14 @@ import Modulos.menuPartidos as MenuPar
 import Modulos.menuResul as menuRes
 
 if (__name__ == "__main__"):
-    equipos  = []
-    fechas = []
-    encuentros =[]
+    equipos  = {}
+    fechas = {}
+    encuentros ={}
     activeMenu = True
+    
     while activeMenu:
-        print(fechas)
         res =  index.crearMenu()
-        print (res)
+        
         if(res == 1):
             try:
                menuE.subMenuEquipo(equipos)
