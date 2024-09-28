@@ -4,7 +4,6 @@ import Modulos.allMenu as all
 jugadores = {}
 entrenadores = {}
 contador = 1
-rol = ["Entrenador", "Asistente Tecnico", "Medico o fisioterapeuta"]
 
 def menuPlantel(equipos:dict):
     ui.limpiarConsola()
@@ -70,13 +69,25 @@ def validaEquipoDispo(equipos:dict, num):
 
 
 def registrarEntrenador(eq:str):
-    print(f"Escoja que roll los disponibles son: \n{rol}")
-    roles = str(input(": ")).lower()
-    nomEn = str(input(f"Nombre del {rol}: "))
-    equipo = eq
-    entrenador  = [nomEn,roles,equipo]
-    print(f"Se registró con exito a:  {entrenador[0]}")
-    entrenadores.append(entrenador)
+    global contador
+    print(f"Escoja que roll los disponibles son: \n")
+    all.crearMenu(all.menuPlaRoll)
+    rolEn = int(input(": "))
+    nomEn = str(input(f"Nombre: "))
+    
+    nameRol = all.menuPlaRoll.get(rolEn, "Rol no encontrado")
+    
+        
+    
+    entrenador = {
+        "nombre" : nomEn,
+        "rol" : nameRol,
+        "equipo" : eq
+    }
+    
+    entrenadores[str(contador).zfill(1)] = entrenador
+    print(f"Se registró con exito a:  {entrenador}")
+    contador += 1
 
 
 

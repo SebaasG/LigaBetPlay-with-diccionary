@@ -20,6 +20,13 @@ menuPla = {
     5 : "Volver"
 }
 
+menuPlaRoll = {
+    1: "Entrenador",
+    2: "Asistente tecnico",
+    3: "Medico o fisioterapeuta"
+}
+
+
 def crearMenu(dir: dict):
     for key, value in dir.items():
         print(f"{key}) {value}")
