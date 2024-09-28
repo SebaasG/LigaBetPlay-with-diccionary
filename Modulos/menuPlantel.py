@@ -1,22 +1,19 @@
+import Modulos.utils as ui
+import Modulos.allMenu as all
 
-import os
-import Modulos.utils as me
-
-jugadores = []
-entrenadores = []
+jugadores = {}
+entrenadores = {}
+contador = 1
 rol = ["Entrenador", "Asistente Tecnico", "Medico o fisioterapeuta"]
 
-def menuPlantel(equipos:list):
+def menuPlantel(equipos:dict):
+    ui.limpiarConsola()
+    isValid = True
     try:
-        
-        me.limpiarConsola()
-        print("este es el menu del plantel ")
-        isValid = True
-
         while isValid:
-            print("1. Registrar Jugadores \n2. Ver jugadores \n3. Registrar entrenador\n4.Ver entrenadores\n5. Volver ")
+            all.crearMenu(all.menuPla)
             opc = int(input(": "))
-            if(opc == 1):
+            if opc == 1:
                 validaEquipoDispo(equipos,1)
             elif(opc ==2):
                 
@@ -34,30 +31,39 @@ def menuPlantel(equipos:list):
 
 
 def registrarJugador (equipo:str):
-    
+    global contador
     nom = str(input("Ingrese el nombre del jugador: "))
     dorsal = int(input("Ingrese el dorsal del jugador: "))
     pos = str(input("Ingrese la posición del jugador: "))
     eq = equipo
-    player= [nom,dorsal,pos,eq]
+    jugador = {
+        "nombre" : nom,
+        "dorsal" : dorsal,
+        "posicion": pos,
+        "equipo" : eq,
+    }
     
-    print(f"Se registró con exito a:  {player[0]}")
-    jugadores.append(player)
+    print(f"Se registró con exito a:  {jugador}")
+    jugadores[str(contador).zfill(2)] = jugador
+    contador += 1
 
 
-def validaEquipoDispo(equipos:list, num):
+def validaEquipoDispo(equipos:dict, num):
     try:
-        equiposDispo = []
-        for i in range(0, len(equipos)):
-            equiposDispo.append(equipos[i][0])
-        print(f"Ingrese el nombre del equipo, los disponibles son los siguientes: \n{equiposDispo}")
-        nomEquipo = str(input(": "))
-        if (nomEquipo in equiposDispo):
+        info = [info["nombre"] for info in equipos.values()]
+        print(info)
 
-            if(num == 1 ):
-                registrarJugador(nomEquipo)
-            elif(num == 2):
-                registrarEntrenador(nomEquipo)
+        nomEquipo = str(input(": "))
+        if(nomEquipo in info):
+            print("si está")
+        else:
+            print("no esta")
+        
+        
+        if(num == 1 ):
+            registrarJugador(nomEquipo)
+        elif(num == 2):
+            registrarEntrenador(nomEquipo)
         return nomEquipo
     except ValueError:
         print("Error en el sistema")
