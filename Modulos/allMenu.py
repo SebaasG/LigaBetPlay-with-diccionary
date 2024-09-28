@@ -12,7 +12,6 @@ menuEq = {
     3 : "Volver",
 }
 
-
 def crearMenu(dir: dict):
     for key, value in dir.items():
         print(f"{key}) {value}")
