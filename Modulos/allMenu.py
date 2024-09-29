@@ -21,9 +21,10 @@ menuPla = {
 }
 
 menuPlaRoll = {
-    1: "Entrenador",
+    1: "Tecnico",
     2: "Asistente tecnico",
-    3: "Medico o fisioterapeuta"
+    3: "Preparador fisico",
+    4: "Cuerpo medico"
 }
 
 menuPar = {
