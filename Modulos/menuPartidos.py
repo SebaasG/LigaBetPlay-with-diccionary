@@ -1,13 +1,15 @@
 import Modulos.utils as ui
+import Modulos.allMenu as all
 
-encuentros = []  # Variable global
+encuentros = {}
 
-def menuPartidos(equipos: list):
+def menuPartidos(equipos: dict):
+    isValid = True
     try:
-        isValid = True
+    
         while isValid:
             ui.limpiarConsola()
-            print("1. Programar partido \n2. Ver partidos \n3. Salir")
+            all.crearMenu(all.menuPar)
             opc = int(input(": "))
             print(opc)
             if opc == 1:
@@ -31,10 +33,9 @@ def menuPartidos(equipos: list):
     return encuentros  # Retorna la lista de encuentros
 
 def programar(equipos: list):
-    print(f"Estos son los equipos disponibles: {equipos}")
-    equiposDispo = [equipo[0] for equipo in equipos]
     
-    print(f"Ingrese el nombre del primer equipo, los disponibles son: \n{equiposDispo}")
+    info = [info["nombre"] for info in equipos.values()]
+    print(f"Ingrese el nombre del primer equipo, los disponibles son: \n{info}")
     nomEquipo = input(": ")
 
     if nomEquipo not in equiposDispo:

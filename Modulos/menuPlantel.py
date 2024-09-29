@@ -20,7 +20,7 @@ def menuPlantel(equipos:dict):
             elif(opc == 3):
                 validaEquipoDispo(equipos,2)
             elif(opc == 4):
-                print(f"sus jugadores son los siguientes: {entrenadores}")
+                print(f"sus entrenadores son los siguientes: {entrenadores}")
             elif(opc == 5):
                 isValid = False
             else:
