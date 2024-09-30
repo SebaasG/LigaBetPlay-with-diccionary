@@ -3,10 +3,12 @@ import Modulos.menuEquipos as menuE
 import Modulos.menuPlantel as menuP
 import Modulos.menuPartidos as MenuPar
 import Modulos.menuResul as menuRes
+import Modulos.estadisticas as menuEstad
 
 def main():
     equipos = {}
     fechas = {}
+    jugadores = {}
     encuentros = {}
     activeMenu = True
     
@@ -21,7 +23,7 @@ def main():
                 
         elif res == 2:
             try:
-                menuP.menuPlantel(equipos)
+                menuP.menuPlantel(equipos, jugadores)
             except ValueError:
                 print("Ocurrió un error al acceder al menú del plantel.")
                 
@@ -34,6 +36,10 @@ def main():
             encuentros.append(res)
         
         elif res == 5:
+            menuEstad.subMenuEquipo(jugadores)
+        elif res == 6:
+            pass
+        elif res == 7:
             activeMenu = False
             
 if __name__ == "__main__":

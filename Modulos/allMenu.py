@@ -3,7 +3,9 @@ menuP = {
     2 : "Plantel equipos",
     3 : "Programar partidos",
     4 : "Resultado fecha",
-    5 : "Salir"
+    5 : "Estadisticas",
+    6 : "Información general",
+    7 : "Salir"
 }   
 
 menuEq = {
@@ -33,11 +35,12 @@ menuPar = {
     3 : "Volver"
 }
 
-estad = {
-    1 : "Registar novedad jugador",
+menuEstad = {
+    1 : "Registar estadistica jugador",
     2 : "Ver estadisticas de jugadores",
-    3 : 
-
+    3 : "Jugador que más falta ha cometido",
+    4 : "Jugador con más tarjetas amarillas",
+    5 : "Volver"
 }
 
 

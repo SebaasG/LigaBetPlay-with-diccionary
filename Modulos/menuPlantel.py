@@ -1,11 +1,11 @@
 import Modulos.utils as ui
 import Modulos.allMenu as all
 
-jugadores = {}
+# jugadores = {}
 entrenadores = {}
 contador = 1
 
-def menuPlantel(equipos:dict):
+def menuPlantel(equipos:dict, jugadores :dict):
     ui.limpiarConsola()
     isValid = True
     try:
@@ -13,7 +13,7 @@ def menuPlantel(equipos:dict):
             all.crearMenu(all.menuPla)
             opc = int(input(": "))
             if opc == 1:
-                validaEquipoDispo(equipos,1)
+                validaEquipoDispo(equipos,1, jugadores)
             elif(opc ==2):
                 
                 print(f"sus jugadores son los siguientes: {jugadores}")
@@ -29,7 +29,7 @@ def menuPlantel(equipos:dict):
         print("Error en la ejecucion del programa")
 
 
-def registrarJugador (equipo:str):
+def registrarJugador (equipo:str, jugadores: dict):
     global contador
     nom = str(input("Ingrese el nombre del jugador: "))
     dorsal = int(input("Ingrese el dorsal del jugador: "))
@@ -51,20 +51,18 @@ def registrarJugador (equipo:str):
     contador += 1
 
 
-def validaEquipoDispo(equipos:dict, num):
+def validaEquipoDispo(equipos:dict, num, jugadores):
     try:
         info = [info["nombre"] for info in equipos.values()]
         print(info)
 
         nomEquipo = str(input(": "))
-        if(nomEquipo in info):
-            print("si está")
-        else:
-            print("no esta")
-        
-        
+        # if(nomEquipo in info):
+        #     print("si está")
+        # else:
+        #     print("no esta")
         if(num == 1 ):
-            registrarJugador(nomEquipo)
+            registrarJugador(nomEquipo, jugadores)
         elif(num == 2):
             registrarEntrenador(nomEquipo)
         return nomEquipo
