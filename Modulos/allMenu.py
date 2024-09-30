@@ -33,6 +33,13 @@ menuPar = {
     3 : "Volver"
 }
 
+estad = {
+    1 : "Registar novedad jugador",
+    2 : "Ver estadisticas de jugadores",
+    3 : 
+
+}
+
 
 def crearMenu(dir: dict):
     for key, value in dir.items():

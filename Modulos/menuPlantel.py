@@ -40,8 +40,12 @@ def registrarJugador (equipo:str):
         "dorsal" : dorsal,
         "posicion": pos,
         "equipo" : eq,
+        "golAn": 0,
+        "tarjeAma": 0,
+        "tarjeRoja" : 0,
+        "FalCome" : 0
     }
-    
+
     print(f"Se registró con exito a:  {jugador}")
     jugadores[str(contador).zfill(2)] = jugador
     contador += 1
