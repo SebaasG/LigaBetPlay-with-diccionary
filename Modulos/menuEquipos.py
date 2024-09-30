@@ -50,5 +50,6 @@ def pedirDatos():
         "pe": 0,
         "gf": 0,
         "gc": 0,
+        "pt": 0,
     }
     return datos

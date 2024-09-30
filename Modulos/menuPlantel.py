@@ -1,7 +1,7 @@
 import Modulos.utils as ui
 import Modulos.allMenu as all
 
-# jugadores = {}
+
 entrenadores = {}
 contador = 1
 

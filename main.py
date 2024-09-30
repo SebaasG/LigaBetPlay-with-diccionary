@@ -7,7 +7,6 @@ import Modulos.estadisticas as menuEstad
 
 def main():
     equipos = {}
-    fechas = {}
     jugadores = {}
     encuentros = {}
     activeMenu = True
@@ -28,12 +27,10 @@ def main():
                 print("Ocurrió un error al acceder al menú del plantel.")
                 
         elif res == 3:
-            resul = MenuPar.menuPartidos(equipos)
-            fechas.append(resul)
-        
+            resul = MenuPar.menuPartidos(equipos, encuentros)
         elif res == 4:
-            res = menuRes.menuResul(fechas)
-            encuentros.append(res)
+            res = menuRes.menuResul(encuentros, equipos)
+            
         
         elif res == 5:
             menuEstad.subMenuEquipo(jugadores)

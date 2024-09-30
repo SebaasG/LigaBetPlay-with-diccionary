@@ -2,12 +2,10 @@ import Modulos.utils as ui
 import Modulos.allMenu as all
 from datetime import datetime
 
-# Variable global para almacenar encuentros y contador
-encuentros = {}
 contador = 1
 
 # Función principal del menú de partidos
-def menuPartidos(equipos: dict):
+def menuPartidos(equipos: dict, encuentros: dict):
     isValid = True
     try:
         while isValid:
@@ -24,11 +22,11 @@ def menuPartidos(equipos: dict):
 
             if opc == 1:
                 ui.limpiarConsola()
-                programar(equipos)
+                programar(equipos, encuentros)
                 input("Presione una tecla para continuar...")
             elif opc == 2:
                 ui.limpiarConsola()
-                mostrarPartidos()
+                mostrarPartidos(encuentros)
                 input("Presione una tecla para continuar...")
             elif opc == 3:
                 isValid = False
@@ -52,7 +50,7 @@ def validarFecha(fecha_str: str) -> bool:
         return False
 
 # Función para programar partidos
-def programar(equipos: dict):
+def programar(equipos: dict, encuentros: dict):
     global contador
     nombresEquipos = [equipo["nombre"] for equipo in equipos.values()]
 
@@ -93,12 +91,11 @@ def programar(equipos: dict):
         "fecha": date
     }
 
-    encuentros[str(contador).zfill(2)] = encuentro
-    contador += 1
-
-    print("El encuentro ha sido registrado correctamente.")
+    encuentros[str(contador).zfill(2)] = encuentro  # Aquí puedes guardar el encuentro en un diccionario global
     
-def mostrarPartidos():
+    contador += 1
+    
+def mostrarPartidos(encuentros):
     if not encuentros:
         print("No hay partidos programados.")
         return
@@ -108,7 +105,11 @@ def mostrarPartidos():
         equipo1 = datos["equipo1"]
         equipo2 = datos["equipo2"]
         fecha = datos["fecha"]
+        
+        # Mostrar en un formato más amigable
         print(f"Partido {id_encuentro}:")
         print(f"{equipo1} vs {equipo2}")
         print(f"Fecha: {fecha}")
         print("==========================")
+
+    print("Total de partidos programados:", len(encuentros))

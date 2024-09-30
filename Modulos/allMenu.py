@@ -43,6 +43,13 @@ menuEstad = {
     5 : "Volver"
 }
 
+menuResul = {
+    1 : "Registrar resultados",
+    2 : "Ver resultados",
+    3 : "Ver tabla de posiciones",
+    4 : "Volver"
+}
+
 
 def crearMenu(dir: dict):
     for key, value in dir.items():

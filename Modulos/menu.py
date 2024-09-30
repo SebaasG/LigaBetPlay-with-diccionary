@@ -8,13 +8,10 @@ def crearMenu():
             print("*****************************************************")
             print("****               LIGA BETPLAY                  ****")
             print("*****************************************************")
-            # for key, value in all.menuP.items():
-            #     print(f"{key}) {value}")
             all.crearMenu(all.menuP)
             
-            resul = int(input(":")) 
-            
-            # Verificamos si la opción es válida
+            resul = int(input(":"))
+          
             if not ui.validar(resul, all.menuP):  
                 continue
             
