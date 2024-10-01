@@ -12,32 +12,29 @@ def main():
     activeMenu = True
     
     while activeMenu:
-        res = index.crearMenu()
+        res = index.crearMenu()  # Mostrar el menú principal
         
         if res == 1:
             try:
-                menuE.subMenuEquipo(equipos)
+                menuE.subMenuEquipo(equipos)  # Acceder al submenú de equipos
             except ValueError:
                 print("Ha ocurrido un error, intente más tarde.")
                 
         elif res == 2:
             try:
-                menuP.menuPlantel(equipos, jugadores)
+                menuP.menuPlantel(equipos, jugadores)  # Acceder al menú del plantel
             except ValueError:
                 print("Ocurrió un error al acceder al menú del plantel.")
                 
         elif res == 3:
-            resul = MenuPar.menuPartidos(equipos, encuentros)
+            encuentros = MenuPar.menuPartidos(equipos, encuentros)  # Programar partidos
         elif res == 4:
-            res = menuRes.menuResul(encuentros, equipos)
-            
+            res = menuRes.menuResul(encuentros, equipos)  # Acceder al menú de resultados
         
         elif res == 5:
-            menuEstad.subMenuEquipo(jugadores)
+            menuEstad.subMenuEquipo(jugadores)  # Acceder al menú de estadísticas
         elif res == 6:
-            pass
-        elif res == 7:
-            activeMenu = False
-            
+            activeMenu = False 
+    
 if __name__ == "__main__":
     main()

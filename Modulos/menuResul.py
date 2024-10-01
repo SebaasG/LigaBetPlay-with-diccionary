@@ -1,26 +1,32 @@
-import Modulos.utils as ut
-import Modulos.allMenu as all
+# Author: mspg
+
+import Modulos.utils as ut  # Importar utilidades para limpiar la consola
+import Modulos.allMenu as all  # Importar los menús disponibles
 
 # Diccionario global para almacenar los resultados de los partidos
 resultados = {}
 
 def menuResul(fechas: dict, equipos: dict):
+    """
+    Menú principal para la gestión de resultados.
+    """
     isValid = True
-    ut.limpiarConsola() 
+    ut.limpiarConsola()
     try:
         while isValid:
-            print(fechas)  # Mostrar fechas
-            all.crearMenu(all.menuResul)  
-            opc = int(input(": "))  
+            print(fechas)  # Mostrar fechas disponibles
+            all.crearMenu(all.menuResul)  # Crear menú de opciones
+            opc = int(input(": "))
 
             if opc == 1:
-                regiResul(fechas, equipos)  
+                regiResul(fechas, equipos)  # Registrar resultado
             elif opc == 2:
-                verResultados()  # Opción para ver resultados
+                verResultados()  # Ver resultados registrados
             elif opc == 3:
-                verResultados() 
+                mostrarEstadisticas(equipos)  # Mostrar estadísticas
+                input("Presione cualquier tecla para continuar...")
             elif opc == 4:
-                isValid = False  
+                isValid = False  # Salir del menú
             else:
                 print("Escogió un valor inválido")
                 input("Presione cualquier tecla para continuar...")
@@ -31,15 +37,17 @@ def menuResul(fechas: dict, equipos: dict):
         input("Presione cualquier tecla para continuar...")
         ut.limpiarConsola()
 
-# Función para registrar el resultado de un encuentro en una fecha
 def regiResul(fechas, equipos):
+    """
+    Registro del resultado de un partido.
+    """
     if not fechas:
         print("No hay fechas disponibles.")
         input("Presione cualquier tecla para continuar...")
         return
 
     print("¿A qué encuentro le quiere registrar el resultado?")
-    for index, fecha in enumerate(fechas.keys()):  
+    for index, fecha in enumerate(fechas.keys()):
         print(f"{index + 1}. {fecha}")
     
     try:
@@ -49,19 +57,22 @@ def regiResul(fechas, equipos):
             input("Presione cualquier tecla para continuar...")
             return
         
-        numFecha = list(fechas.keys())[opc]  # Obtener la clave correspondiente
-        resultado(numFecha, equipos)
+        numFecha = list(fechas.keys())[opc]  # Seleccionar la fecha
+        resultado(numFecha, equipos)  # Registrar el resultado
 
     except ValueError:
         print("Error: Por favor, ingrese un número válido.")
         input("Presione cualquier tecla para continuar...")
 
 def resultado(numFecha, equipos):
+    """
+    Registra los goles para ambos equipos en la fecha seleccionada.
+    """
     try:
         golesEq1 = int(input(f"¿Cuántos goles anotó el {equipos['01']['nombre']}?: "))
         golesEq2 = int(input(f"¿Cuántos goles anotó el {equipos['02']['nombre']}?: "))
 
-        # Guardar el resultado en el diccionario global
+        # Guardar resultado en el diccionario global
         resultados[numFecha] = {
             "equipo1": equipos['01']['nombre'],
             "golesEq1": golesEq1,
@@ -69,6 +80,7 @@ def resultado(numFecha, equipos):
             "equipo2": equipos['02']['nombre']
         }
 
+        # Actualizar estadísticas de los equipos
         actualizar("01", golesEq1, golesEq2, equipos)
         actualizar("02", golesEq2, golesEq1, equipos)
 
@@ -81,25 +93,31 @@ def resultado(numFecha, equipos):
         input("Presione cualquier tecla para continuar...")
 
 def actualizar(idEquipo, golesFavor, golesContra, equipos):
-    equipos[idEquipo]['gf'] += golesFavor
-    equipos[idEquipo]['gc'] += golesContra
-    equipos[idEquipo]['pj'] += 1 
+    """
+    Actualiza las estadísticas de un equipo tras registrar un partido.
+    """
+    equipos[idEquipo]['gf'] += golesFavor  # Goles a favor
+    equipos[idEquipo]['gc'] += golesContra  # Goles en contra
+    equipos[idEquipo]['pj'] += 1  # Partidos jugados
 
     if golesFavor > golesContra:
-        equipos[idEquipo]['pg'] += 1  
-        equipos[idEquipo]['pt'] += 3  
+        equipos[idEquipo]['pg'] += 1  # Partidos ganados
+        equipos[idEquipo]['pt'] += 3  # Puntos ganados
     elif golesFavor < golesContra:
-        equipos[idEquipo]['pp'] += 1  
+        equipos[idEquipo]['pp'] += 1  # Partidos perdidos
     else:
-        equipos[idEquipo]['pe'] += 1 
-        equipos[idEquipo]['pt'] += 1  
+        equipos[idEquipo]['pe'] += 1  # Partidos empatados
+        equipos[idEquipo]['pt'] += 1  # Puntos por empate
 
-    # Mostrar datos actualizados del equipo
+    # Mostrar estadísticas actualizadas
     print(f"\nDatos actualizados de {equipos[idEquipo]['nombre']}:")
     for key, value in equipos[idEquipo].items():
         print(f"{key}: {value}")
 
 def verResultados():
+    """
+    Mostrar todos los resultados registrados.
+    """
     if not resultados:
         print("No hay resultados registrados.")
         input("Presione cualquier tecla para continuar...")
@@ -111,15 +129,25 @@ def verResultados():
         print(f"{resultado['equipo1']} {resultado['golesEq1']} - {resultado['golesEq2']} {resultado['equipo2']}")
         print("=============================")
     input("Presione cualquier tecla para continuar...")
-    
-    
-def mostrarTablaPosiciones(equipos: dict):
-    print("\n== Tabla de Posiciones ==")
-    print(f"{'Equipo':<20} {'PJ':<5} {'PG':<5} {'PP':<5} {'PE':<5} {'GF':<5} {'GC':<5} {'PT':<5}")
-    print("="*50)
 
-    for idEquipo, datos in equipos.items():
-        print(f"{datos['nombre']:<20} {datos['pj']:<5} {datos['pg']:<5} {datos['pp']:<5} {datos['pe']:<5} {datos['gf']:<5} {datos['gc']:<5} {datos['pt']:<5}")
+def mostrarEstadisticas(equipos: dict):
+    """
+    Mostrar estadísticas del torneo.
+    """
+    if not equipos:
+        print("No hay equipos registrados.")
+        input("Presione cualquier tecla para continuar...")
+        return
+
+    # Cálculo de estadísticas
+    equipoMasGoles = max(equipos.items(), key=lambda x: x[1]['gf'])
+    equipoMasGc = max(equipos.items(), key=lambda x: x[1]['gc'])
+    equipoUltimo = min(equipos.items(), key=lambda x: x[1]['pt'])
+
+    # Mostrar estadísticas
+    print("\n== Estadísticas del Torneo ==")
+    print(f"Equipo con más goles marcados: {equipoMasGoles[1]['nombre']} ({equipoMasGoles[1]['gf']} goles)")
+    print(f"Equipo con más goles en contra: {equipoMasGc[1]['nombre']} ({equipoMasGc[1]['gc']} goles)")
+    print(f"Equipo en el último puesto: {equipoUltimo[1]['nombre']} ({equipoUltimo[1]['pt']} puntos)")
 
     input("Presione cualquier tecla para continuar...")
-
